@@ -68,6 +68,7 @@ const createBookingCheckout = async (session) => {
   const price = session.amount_total / 100;
 
   await Booking.create({ tour, user, price });
+  console.log(price);
 };
 
 exports.webhookCheckout = (req, res, next) => {
@@ -81,7 +82,6 @@ exports.webhookCheckout = (req, res, next) => {
       process.env.STRIPE_WEBHOOK_SECRET
     );
   } catch (err) {
-
     res.status(400).send(`Webhook Error: ${err.message}`);
   }
 
